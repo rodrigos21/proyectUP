@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS PRODUCT;
+DROP TABLE IF EXISTS USERS;
+
+create table PRODUCT
+(
+    ID_PRODUCT  INTEGER auto_increment primary key,
+    DESCRIPTION CHARACTER VARYING(255),
+    AMOUNT      NUMERIC not null
+);
+create table USERS
+(
+    ID_USER INTEGER auto_increment primary key,
+    EMAIL CHARACTER VARYING(50),
+    PASSWORD CHARACTER VARYING(50),
+    ROLE CHARACTER VARYING(20)
+);
