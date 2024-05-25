@@ -3,28 +3,27 @@ package arq.web.tp.integrador.products.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-
-@Table(name = "PRODUCT")
 @Entity
+@Table(name = "PRODUCT")
 public class ProductEntity implements Serializable {
 
     private static final long serialVersionUID = 2481350986623601245L;
 
     @Id
-    @Column(name = "ID_PRODUCT", nullable = false, precision = 12)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProduct;
+    @Column(name = "ID_PRODUCT", nullable = false, precision = 12)
+    private Long id;
     @Column(name = "DESCRIPTION", nullable = false, length = 255)
     private String description;
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
 
-    public Long getIdProduct() {
-        return idProduct;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {

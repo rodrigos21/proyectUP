@@ -17,7 +17,7 @@ public class UserConverter {
 
     public static UserEntity toEntity (UserDTO dto){
         UserEntity entity = new UserEntity();
-        entity.setId(dto.getId());
+        //entity.setId(dto.getId());
         entity.setEmail(dto.getEmail());
         entity.setPassword(dto.getPassword());
         entity.setRole(dto.getRole());

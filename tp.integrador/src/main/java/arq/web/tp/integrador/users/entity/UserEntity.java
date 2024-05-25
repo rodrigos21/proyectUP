@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "USERS")
+@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = "EMAIL"))
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 2481350986623601245L;

@@ -2,6 +2,7 @@ package arq.web.tp.integrador.products.controller;
 
 import arq.web.tp.integrador.products.dao.repository.ProductJPARepository;
 import arq.web.tp.integrador.products.dto.ProductDTO;
+import arq.web.tp.integrador.products.dto.PurchaseOrder;
 import arq.web.tp.integrador.products.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,17 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     private ProductService productService;
-    private ProductJPARepository productJPARepository;
 
     @Autowired
     public ProductController(ProductService productService,
                              ProductJPARepository productJPARepository) {
         this.productService = productService;
-        this.productJPARepository = productJPARepository;
     }
 
     @GetMapping

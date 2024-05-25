@@ -1,12 +1,14 @@
 package arq.web.tp.integrador.products.service.impl;
 
 
+import arq.web.tp.integrador.exceptions.CustomException;
 import arq.web.tp.integrador.products.converter.ProductConverter;
-import arq.web.tp.integrador.products.dao.ProductDAO;
 import arq.web.tp.integrador.products.dao.repository.ProductJPARepository;
 import arq.web.tp.integrador.products.dto.ProductDTO;
 import arq.web.tp.integrador.products.service.ProductService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,40 +16,58 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductDAO productDAO;
     private ProductJPARepository productJPARepository;
 
     @Autowired
-    public ProductServiceImpl(ProductDAO productDAO,
-                              ProductJPARepository productJPARepository) {
-        this.productDAO = productDAO;
+    public ProductServiceImpl(ProductJPARepository productJPARepository) {
         this.productJPARepository = productJPARepository;
     }
 
     @Override
     public List<ProductDTO> getProducts() {
-        return productJPARepository.getProducts().stream().map(p -> ProductConverter.toDTO(p)).toList();
+        try {
+            return productJPARepository.getProducts().stream().map(p -> ProductConverter.toDTO(p)).toList();
+        } catch (Exception e) {
+            throw new CustomException("Error al obtener productos", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ProductDTO getById(Long id) {
-        return ProductConverter.toDTO(productJPARepository.getReferenceById(id));
+        try {
+            return ProductConverter.toDTO(productJPARepository.getReferenceById(id));
+        } catch (Exception e) {
+            throw new CustomException("Error al obtener producto", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
+    @Transactional
     public Long createProduct(ProductDTO productDTO) {
-
-        var r = productJPARepository.save(ProductConverter.toEntity(productDTO));
-        return r.getIdProduct();
+        try {
+            var r = productJPARepository.save(ProductConverter.toEntity(productDTO));
+            return r.getId();
+        } catch (Exception e) {
+            throw new CustomException("Error al crear", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
+    @Transactional
     public void updateProduct(ProductDTO productDTO) {
-        productJPARepository.save(ProductConverter.toEntity(productDTO));
+        try {
+            productJPARepository.save(ProductConverter.toEntity(productDTO));
+        } catch (Exception e) {
+            throw new CustomException("Error al actualizar", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public void deleteProduct(Long productId) {
-        productJPARepository.deleteById(productId);
+        try {
+            productJPARepository.deleteById(productId);
+        } catch (Exception e) {
+            throw new CustomException("Error al eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
