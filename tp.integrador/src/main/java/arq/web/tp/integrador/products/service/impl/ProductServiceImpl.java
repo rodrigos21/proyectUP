@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO getById(Long id) {
         var p = productJPARepository.getProductById(id);
-        if(ObjectUtils.isEmpty(p)){
+        if (ObjectUtils.isEmpty(p)) {
             throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
         return ProductConverter.toDTO(p);
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void updateProduct(Long productId, ProductDTO productDTO) {
         var p = productJPARepository.findById(productId);
-        if(p == null || p.isEmpty()){
+        if (p == null || p.isEmpty()) {
             throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
         productJPARepository.save(ProductConverter.toEntity(productDTO));
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteProduct(Long productId) {
         var p = productJPARepository.findById(productId);
-        if(p == null || p.isEmpty()){
+        if (p == null || p.isEmpty()) {
             throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
         productJPARepository.deleteById(productId);

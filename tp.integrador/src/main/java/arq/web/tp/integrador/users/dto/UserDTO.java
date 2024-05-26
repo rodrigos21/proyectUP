@@ -1,7 +1,9 @@
 package arq.web.tp.integrador.users.dto;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+import java.io.Serializable;
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO implements Serializable {
 
     private static final long serialVersionUID = 2481350986623601245L;

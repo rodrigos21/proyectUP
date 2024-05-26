@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -49,7 +48,7 @@ public class OrderService {
         List<OrderProductsEntity> orderProductsEntityList = new ArrayList<>();
 
         userEntity = userJPARepository.getUserById(order.getUser().getId());
-        if(userEntity == null){
+        if (userEntity == null) {
             throw new CustomException("User not found", HttpStatus.NOT_FOUND);
         }
 
@@ -57,10 +56,13 @@ public class OrderService {
         var savedOrder = orderJPARepository.save(orderEntity);
 
         order.getProducts().forEach(e -> {
-            var productJPA = productJPARepository.findById(e.longValue());
+            var productJPA = productJPARepository.getProductById(e.longValue());
+            if (productJPA == null) {
+                throw new CustomException("User not found", HttpStatus.NOT_FOUND);
+            }
             OrderProductsEntity orderProducts = new OrderProductsEntity();
             orderProducts.setOrder(savedOrder);
-            orderProducts.setProduct(productJPA.orElseThrow());
+            orderProducts.setProduct(productJPA);
             orderProductJPARepository.save(orderProducts);
         });
         return null;
@@ -68,26 +70,21 @@ public class OrderService {
 
     @Transactional
     public Report getReport() {
-        List<OrderEntity> orderEntityList = orderJPARepository.findAll();
+        List<OrderEntity> orderEntityList = orderJPARepository.getOrderEntity();
         Report report = new Report();
         List<OrderReport> orderReportList = new ArrayList<>();
 
         for (OrderEntity e : orderEntityList) {
             OrderReport orderReport = new OrderReport();
-            List<OrderProductsEntity> orderProductsEntityList = orderProductJPARepository.findAllById(Collections.singleton(e.getId().longValue()));
+            List<OrderProductsEntity> orderProductsEntityList = orderProductJPARepository.findByOrderId(e.getId());
             List<ProductDTO> productDTOList = new ArrayList<>();
 
             orderProductsEntityList.forEach(p -> {
-                ProductDTO productDTO = new ProductDTO();
-                var productsEntity = productJPARepository.findById(p.getProduct().getId());
-                productDTO.setId(productsEntity.orElseThrow().getId());
-                productDTO.setDescription(productsEntity.orElseThrow().getDescription());
-                productDTO.setAmount(productsEntity.orElseThrow().getAmount());
-                productDTOList.add(productDTO);
+                productDTOList.add(getAndMapProductsReports(p));
             });
 
             orderReport.setId(e.getId());
-            orderReport.setUser(getUserDTO(e.getUser().getId()));
+            orderReport.setUser(getAndMapUserDTO(e.getUser().getId()));
             orderReport.setProducts(productDTOList);
             orderReportList.add(orderReport);
         }
@@ -95,11 +92,23 @@ public class OrderService {
         return report;
     }
 
-    private UserDTO getUserDTO(Long userId) {
+    private UserDTO getAndMapUserDTO(Long userId) {
         UserEntity userEntity = userJPARepository.getUserById(userId);
         UserDTO userDTO = new UserDTO();
         userDTO.setId(userEntity.getId());
         userDTO.setEmail(userEntity.getEmail());
         return userDTO;
+    }
+
+    private ProductDTO getAndMapProductsReports(OrderProductsEntity p) {
+        ProductDTO productDTO = new ProductDTO();
+        var productsEntity = productJPARepository.findById(p.getProduct().getId());
+        if (productsEntity.isPresent()) {
+            var product = productsEntity.get();
+            productDTO.setId(productsEntity.orElseThrow().getId());
+            productDTO.setDescription(productsEntity.orElseThrow().getDescription());
+            productDTO.setAmount(productsEntity.orElseThrow().getAmount());
+        }
+        return productDTO;
     }
 }
