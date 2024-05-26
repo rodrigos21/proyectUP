@@ -1,8 +1,10 @@
 package arq.web.tp.integrador.users.entity;
 
+import arq.web.tp.integrador.orders.entity.OrderEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = "EMAIL"))
@@ -20,6 +22,9 @@ public class UserEntity implements Serializable {
     private String password;
     @Column(name = "ROLE", nullable = false, length = 20)
     private String role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<OrderEntity> orders;
 
     public Long getId() {
         return id;
@@ -53,4 +58,11 @@ public class UserEntity implements Serializable {
         this.role = role;
     }
 
+    public List<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
+    }
 }

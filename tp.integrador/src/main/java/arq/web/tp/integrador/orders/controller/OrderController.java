@@ -11,18 +11,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/orders")
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
 
+    @Autowired
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
 
     @PostMapping("/purchase")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Long createPurchase(PurchaseOrder order){
+    @ResponseStatus(HttpStatus.CREATED)
+    public Long createPurchase(@RequestBody PurchaseOrder order) {
         return orderService.createPurchase(order);
     }
 
-    @GetMapping
-    public Report getReport(){
+    @GetMapping("/report")
+    public Report getReport() {
         return orderService.getReport();
     }
 }

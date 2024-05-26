@@ -3,26 +3,15 @@ package arq.web.tp.integrador.exceptions;
 import org.springframework.http.HttpStatus;
 
 public class CustomException extends RuntimeException {
-    private String message;
-    private HttpStatus status;
+    private static final long serialVersionUID = 1L;
+    private final HttpStatus status;
 
     public CustomException(String message, HttpStatus status) {
-        this.message = message;
+        super(message);
         this.status = status;
-
-    }
-
-    public CustomException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 
     public HttpStatus getStatus() {
         return status;
     }
-
 }

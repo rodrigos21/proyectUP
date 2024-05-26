@@ -15,7 +15,8 @@ public class OrderEntity implements Serializable {
     private static final long serialVersionUID = 2481350986623601245L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "orders_seq")
+    @SequenceGenerator(name = "orders_seq", sequenceName = "ORDERS_SEQ", allocationSize = 1)
     @Column(name = "ID_ORDER")
     private Long id;
 

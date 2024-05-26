@@ -2,7 +2,6 @@ package arq.web.tp.integrador.products.controller;
 
 import arq.web.tp.integrador.products.dao.repository.ProductJPARepository;
 import arq.web.tp.integrador.products.dto.ProductDTO;
-import arq.web.tp.integrador.products.dto.PurchaseOrder;
 import arq.web.tp.integrador.products.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +41,7 @@ public class ProductController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateProduct(@PathVariable(value = "productId") Long productId,
                               @RequestBody ProductDTO productDTO) {
-        productService.updateProduct(productDTO);
+        productService.updateProduct(productId, productDTO);
     }
 
     @DeleteMapping("/{productId}")

@@ -10,8 +10,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -28,17 +30,17 @@ public class ProductServiceImpl implements ProductService {
         try {
             return productJPARepository.getProducts().stream().map(p -> ProductConverter.toDTO(p)).toList();
         } catch (Exception e) {
-            throw new CustomException("Error al obtener productos", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Products not found", HttpStatus.NOT_FOUND);
         }
     }
 
     @Override
     public ProductDTO getById(Long id) {
-        try {
-            return ProductConverter.toDTO(productJPARepository.getReferenceById(id));
-        } catch (Exception e) {
-            throw new CustomException("Error al obtener producto", HttpStatus.BAD_REQUEST);
+        var p = productJPARepository.getProductById(id);
+        if(ObjectUtils.isEmpty(p)){
+            throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
+        return ProductConverter.toDTO(p);
     }
 
     @Override
@@ -48,26 +50,26 @@ public class ProductServiceImpl implements ProductService {
             var r = productJPARepository.save(ProductConverter.toEntity(productDTO));
             return r.getId();
         } catch (Exception e) {
-            throw new CustomException("Error al crear", HttpStatus.BAD_REQUEST);
+            throw new CustomException("Error creating product", HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
     @Transactional
-    public void updateProduct(ProductDTO productDTO) {
-        try {
-            productJPARepository.save(ProductConverter.toEntity(productDTO));
-        } catch (Exception e) {
-            throw new CustomException("Error al actualizar", HttpStatus.BAD_REQUEST);
+    public void updateProduct(Long productId, ProductDTO productDTO) {
+        var p = productJPARepository.findById(productId);
+        if(p == null || p.isEmpty()){
+            throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
+        productJPARepository.save(ProductConverter.toEntity(productDTO));
     }
 
     @Override
     public void deleteProduct(Long productId) {
-        try {
-            productJPARepository.deleteById(productId);
-        } catch (Exception e) {
-            throw new CustomException("Error al eliminar", HttpStatus.INTERNAL_SERVER_ERROR);
+        var p = productJPARepository.findById(productId);
+        if(p == null || p.isEmpty()){
+            throw new CustomException("Product not found", HttpStatus.NOT_FOUND);
         }
+        productJPARepository.deleteById(productId);
     }
 }

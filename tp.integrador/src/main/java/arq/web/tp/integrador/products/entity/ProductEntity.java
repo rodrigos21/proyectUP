@@ -1,8 +1,11 @@
 package arq.web.tp.integrador.products.entity;
 
+import arq.web.tp.integrador.orders.entity.OrderProductsEntity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Entity
 @Table(name = "PRODUCT")
 public class ProductEntity implements Serializable {
@@ -17,6 +20,8 @@ public class ProductEntity implements Serializable {
     private String description;
     @Column(name = "AMOUNT", nullable = false)
     private Double amount;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<OrderProductsEntity> orderProducts;
 
     public Long getId() {
         return id;
@@ -40,5 +45,13 @@ public class ProductEntity implements Serializable {
 
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public List<OrderProductsEntity> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(List<OrderProductsEntity> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 }

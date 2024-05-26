@@ -12,7 +12,8 @@ public class OrderProductsEntity implements Serializable {
     private static final long serialVersionUID = 2481350986623601245L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_products_seq")
+    @SequenceGenerator(name = "order_products_seq", sequenceName = "ORDER_PRODUCTS_SEQ", allocationSize = 1)
     @Column(name = "ID_ORDER_PRODUCT")
     private Long id;
 
@@ -24,8 +25,6 @@ public class OrderProductsEntity implements Serializable {
     @JoinColumn(name = "ID_PRODUCT", nullable = false)
     private ProductEntity product;
 
-    @Column(name = "QUANTITY", nullable = false)
-    private int quantity;
 
     public Long getId() {
         return id;
@@ -51,12 +50,5 @@ public class OrderProductsEntity implements Serializable {
         this.product = product;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 }
 

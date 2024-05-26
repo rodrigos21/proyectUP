@@ -4,10 +4,10 @@ import arq.web.tp.integrador.users.dto.UserDTO;
 
 import java.util.List;
 
-public class PurchaseOrder {
+public class OrderReport {
     private Long id;
     private UserDTO user;
-    private List<Integer> products;
+    private List<ProductDTO> products;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class PurchaseOrder {
         this.user = user;
     }
 
-    public List<Integer> getProducts() {
+    public List<ProductDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Integer> products) {
+    public void setProducts(List<ProductDTO> products) {
         this.products = products;
     }
 }
