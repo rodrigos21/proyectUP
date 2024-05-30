@@ -17,4 +17,7 @@ public interface UserJPARepository extends JpaRepository<UserEntity, Long> {
 
     @Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE ID_USER = :userId")
     UserEntity getUserById(@Param("userId")Long userId) throws CustomException;
+
+    @Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE EMAIL = :email")
+    UserEntity findByEmail(@Param("email")String email)throws CustomException;
 }

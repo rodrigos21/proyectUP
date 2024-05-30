@@ -1,5 +1,8 @@
 package arq.web.tp.integrador.users.service.impl;
 
+/*import arq.web.tp.integrador.auth.service.PasswordService;*/
+import arq.web.tp.integrador.auth.dto.UserCredentialDTO;
+import arq.web.tp.integrador.auth.dto.UserLoginResponse;
 import arq.web.tp.integrador.exceptions.CustomException;
 import arq.web.tp.integrador.users.converter.UserConverter;
 import arq.web.tp.integrador.users.dao.repository.UserJPARepository;
@@ -20,10 +23,14 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private UserJPARepository userJPARepository;
+    //private PasswordService passwordService;
+
 
     @Autowired
-    public UserServiceImpl(UserJPARepository userJPARepository) {
+    public UserServiceImpl(UserJPARepository userJPARepository/*,
+                           PasswordService passwordService*/) {
         this.userJPARepository = userJPARepository;
+      /*  this.passwordService = passwordService;*/
     }
 
     @Override
@@ -44,7 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Long createUser(UserDTO userDTO) throws CustomException {
+/*        String hashedPassword = passwordService.encodePassword(userDTO.getPassword());
+        userDTO.setPassword(hashedPassword);*/
         UserEntity entity = UserConverter.toEntity(userDTO);
+
         try {
             var r = userJPARepository.save(entity);
             return r.getId();
@@ -60,5 +70,25 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("User not found", HttpStatus.NOT_FOUND);
         }
         userJPARepository.deleteById(userId);
+    }
+
+    @Override
+    public UserLoginResponse login(UserCredentialDTO userCredentialDTO) {
+        if (userCredentialDTO.getEmail() != null && userCredentialDTO.getPassword() != null) {
+            UserLoginResponse response = new UserLoginResponse();
+            var r = userJPARepository.findByEmail(userCredentialDTO.getEmail());
+            if (r != null && userCredentialDTO.getEmail().equals(r.getEmail())
+                    && userCredentialDTO.getPassword().equals(r.getPassword())) {
+                UserDTO dto = new UserDTO();
+                dto.setId(r.getId());
+                dto.setEmail(r.getEmail());
+                dto.setRole(r.getRole());
+                response.setSuccess(true);
+                response.setMessage("Login successfully");
+                response.setUserDTO(dto);
+                return response;
+            }
+        }
+        return null;
     }
 }
