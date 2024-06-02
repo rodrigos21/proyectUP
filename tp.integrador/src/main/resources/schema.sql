@@ -1,18 +1,18 @@
 
 CREATE TABLE IF NOT EXISTS USERS (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    surname VARCHAR(255),
-    email VARCHAR(255),
-    password VARCHAR(255),
+    name VARCHAR(50),
+    surname VARCHAR(50),
+    email VARCHAR(50),
+    password VARCHAR(100),
     dni VARCHAR(20),
     phone VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS ROLES (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    description VARCHAR(255)
+    name VARCHAR(50),
+    description VARCHAR(50)
 );
 
 CREATE TABLE IF NOT EXISTS USER_ROLES (
@@ -24,3 +24,9 @@ CREATE TABLE IF NOT EXISTS USER_ROLES (
 );
 
 
+CREATE TABLE IF NOT EXISTS USER_SECURITY (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(100),
+    role VARCHAR(20)
+);

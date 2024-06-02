@@ -1,9 +1,6 @@
 package arq.web.tp.integrador.user2.service;
 
-import arq.web.tp.integrador.auth.dto.UserCredentialDTO;
-import arq.web.tp.integrador.auth.dto.UserLoginResponse;
 import arq.web.tp.integrador.exceptions.CustomException;
-import arq.web.tp.integrador.roles.converter.RoleConverter;
 import arq.web.tp.integrador.roles.dto.RoleDTO;
 import arq.web.tp.integrador.roles.dto.UserRoleId;
 import arq.web.tp.integrador.roles.entity.RoleEntity;
@@ -11,8 +8,11 @@ import arq.web.tp.integrador.roles.entity.UserRoleEntity;
 import arq.web.tp.integrador.roles.repository.RoleJPARepository;
 import arq.web.tp.integrador.roles.repository.UserRoleJPARepository;
 import arq.web.tp.integrador.roles.service.RoleService;
+import arq.web.tp.integrador.security.AuthService;
+import arq.web.tp.integrador.security.RegisterRequest;
 import arq.web.tp.integrador.user2.converter.UserConverter;
 import arq.web.tp.integrador.user2.dao.UserJPARepository;
+import arq.web.tp.integrador.user2.dto.Report;
 import arq.web.tp.integrador.user2.dto.UserDTO;
 import arq.web.tp.integrador.user2.dto.UserDTOResponse;
 import arq.web.tp.integrador.user2.dto.UserUpdateRequest;
@@ -41,16 +41,19 @@ public class UserService {
     private UserRoleJPARepository userRoleJPARepository;
     private RoleJPARepository roleJPARepository;
     private RoleService roleService;
+    private AuthService authService;
 
     @Autowired
     public UserService(UserJPARepository userJPARepository,
                        RoleJPARepository roleJPARepository,
                        UserRoleJPARepository userRoleJPARepository,
-                       RoleService roleService) {
+                       RoleService roleService,
+                       AuthService authService) {
         this.userJPARepository = userJPARepository;
         this.roleJPARepository = roleJPARepository;
         this.userRoleJPARepository = userRoleJPARepository;
         this.roleService = roleService;
+        this.authService = authService;
     }
 
     @Transactional
@@ -79,15 +82,20 @@ public class UserService {
                 .build();
         user = userJPARepository.save(user);
 
-        Set<UserRoleEntity> userRoles = new HashSet<>();
-        for (Long roleId : userDTO.getRoles()) {
-            RoleEntity role = roleJPARepository.findById(roleId)
-                    .orElseThrow(() -> new RuntimeException("Role not found: " + roleId));
+        if (userDTO.getRoles() != null && !userDTO.getRoles().isEmpty()) {
+            Set<UserRoleEntity> userRoles = new HashSet<>();
+            for (Long roleId : userDTO.getRoles()) {
+                RoleEntity role = roleJPARepository.findById(roleId)
+                        .orElseThrow(() -> new CustomException("Role not found",HttpStatus.NOT_FOUND));
 
-            UserRoleEntity userRole = new UserRoleEntity(user, role);
-            userRoles.add(userRoleJPARepository.save(userRole));
+                UserRoleEntity userRole = new UserRoleEntity(user, role);
+                userRoles.add(userRoleJPARepository.save(userRole));
+            }
+            user.setRoles(userRoles);
         }
-        user.setRoles(userRoles);
+
+        //  Register a new user on a UserSecurityTable
+        authService.register(RegisterRequest.builder().username(userDTO.getEmail()).password(userDTO.getPassword()).build());
 
         return user.getId();
     }
@@ -151,23 +159,29 @@ public class UserService {
         return entity;
     }
 
-    public UserLoginResponse login(UserCredentialDTO userCredentialDTO) {
-       /* if (userCredentialDTO.getEmail() != null && userCredentialDTO.getPassword() != null) {
-            UserLoginResponse response = new UserLoginResponse();
-            var r = userJPARepository.findByEmail(userCredentialDTO.getEmail());
-            if (r != null && userCredentialDTO.getEmail().equals(r.getEmail())
-                    && userCredentialDTO.getPassword().equals(r.getPassword())) {
-                UserDTO dto = new UserDTO();
-                dto.setId(r.getId());
-                dto.setEmail(r.getEmail());
-                dto.setRole(r.getRole());
-                response.setSuccess(true);
-                response.setMessage("Login successfully");
-                response.setUserDTO(dto);
-                return response;
-            }
-        }*/
-        return null;
-    }
+    public Report getReport() {
+        var x =  userRoleJPARepository.findAll();
+        List<UserRoleEntity> list = x.stream().map(e->{
+            return UserRoleEntity.builder()
+                    .user(new UserEntity().builder()
+                            .id(e.getUser().getId())
+                            .name(e.getUser().getName())
+                            .surname(e.getUser().getSurname())
+                            .dni(e.getUser().getDni())
+                            .email(e.getUser().getEmail())
+                            .phone(e.getUser().getPhone())
+                    .build())
+                    .role(new RoleEntity().builder()
+                            .id(e.getRole().getId())
+                            .name(e.getRole().getName())
+                            .description(e.getRole().getDescription())
+                            .build())
+                    .build();
+        }).collect(Collectors.toList());
 
+        Report report = new Report();
+        report.addAll(list);
+
+        return report;
+    }
 }

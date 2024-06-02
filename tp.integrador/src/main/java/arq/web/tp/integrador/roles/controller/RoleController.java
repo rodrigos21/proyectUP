@@ -23,6 +23,10 @@ public class RoleController {
     public List<RoleDTO> getRoles() {
         return roleService.getRoles();
     }
+    @GetMapping("{id}")
+    public RoleDTO getRole(@PathVariable Long id) {
+        return roleService.getRole(id);
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

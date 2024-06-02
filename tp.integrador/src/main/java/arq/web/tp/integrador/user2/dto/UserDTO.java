@@ -26,7 +26,7 @@ public class UserDTO implements Serializable {
     private String dni;
     @NotBlank
     private String phone;
-    @NotEmpty
+/*    @NotEmpty*/
     private Set<Long> roles;
 
     @Override

@@ -1,5 +1,6 @@
 package arq.web.tp.integrador.user2.controller;
 
+import arq.web.tp.integrador.user2.dto.Report;
 import arq.web.tp.integrador.user2.dto.UserDTO;
 import arq.web.tp.integrador.user2.dto.UserDTOResponse;
 import arq.web.tp.integrador.user2.dto.UserUpdateRequest;
@@ -60,5 +61,10 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUserRole(@PathVariable Long userId, @PathVariable Long roleId) {
         userService.deleteUserRole(userId, roleId);
+    }
+
+    @GetMapping("/reports")
+    public Report getReport() {
+        return userService.getReport();
     }
 }

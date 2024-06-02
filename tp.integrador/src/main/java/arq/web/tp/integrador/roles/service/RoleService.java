@@ -34,7 +34,7 @@ public class RoleService {
     @Transactional
     public RoleDTO getRole(Long roleId) {
         RoleEntity role = roleJPARepository.findById(roleId)
-                .orElseThrow(() -> new RuntimeException("Role not found: " + roleId));
+                .orElseThrow(() -> new CustomException("Role not found" , HttpStatus.NOT_FOUND));
         return RoleConverter.toDTO(role);
     }
 
