@@ -31,3 +31,6 @@ POST /login: Autentica un usuario y proporciona un token JWT.
 - Request Body: (Credenciales de prueba)  `{"username": "admin@admin.com","password": "1234"}`
 - Response Body:`{"token": "jwt-token"}`
 
+## Testing
+- Unit Tests
+- Postman collection
