@@ -1,4 +1,4 @@
-package arq.web.tp.integrador.user2.entity;
+package arq.web.tp.integrador.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

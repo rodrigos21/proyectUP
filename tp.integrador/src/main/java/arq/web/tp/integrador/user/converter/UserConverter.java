@@ -1,11 +1,11 @@
-package arq.web.tp.integrador.user2.converter;
+package arq.web.tp.integrador.user.converter;
 
 
 import arq.web.tp.integrador.roles.converter.RoleConverter;
 import arq.web.tp.integrador.roles.entity.RoleEntity;
-import arq.web.tp.integrador.user2.dto.UserDTO;
-import arq.web.tp.integrador.user2.dto.UserDTOResponse;
-import arq.web.tp.integrador.user2.entity.UserEntity;
+import arq.web.tp.integrador.user.dto.UserDTO;
+import arq.web.tp.integrador.user.dto.UserDTOResponse;
+import arq.web.tp.integrador.user.entity.UserEntity;
 
 import java.util.Set;
 import java.util.stream.Collectors;

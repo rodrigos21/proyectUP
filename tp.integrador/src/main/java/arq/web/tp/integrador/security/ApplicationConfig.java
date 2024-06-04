@@ -1,7 +1,7 @@
 package arq.web.tp.integrador.security;
 
 
-import arq.web.tp.integrador.user2.dao.UserRepository;
+import arq.web.tp.integrador.user.dao.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

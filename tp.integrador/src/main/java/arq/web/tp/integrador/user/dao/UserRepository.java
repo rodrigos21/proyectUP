@@ -1,6 +1,6 @@
-package arq.web.tp.integrador.user2.dao;
+package arq.web.tp.integrador.user.dao;
 
-import arq.web.tp.integrador.user2.entity.User;
+import arq.web.tp.integrador.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

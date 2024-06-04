@@ -39,7 +39,7 @@ public class RoleService {
     }
 
     @Transactional
-    public Long generateRole(RoleDTO role) throws CustomException {
+    public Long createRole(RoleDTO role) throws CustomException {
         RoleEntity newRole = null;
         try {
             newRole = RoleEntity.builder()

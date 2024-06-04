@@ -1,4 +1,4 @@
-package arq.web.tp.integrador.user2.dto;
+package arq.web.tp.integrador.user.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
@@ -6,10 +6,11 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Data
 @Builder
-public class UserUpdateRequest implements Serializable {
+public class UserDTO implements Serializable {
 
     private Long id;
     @NotBlank
@@ -19,9 +20,13 @@ public class UserUpdateRequest implements Serializable {
     @NotBlank
     private String email;
     @NotBlank
+    private String password;
+    @NotBlank
     private String dni;
     @NotBlank
     private String phone;
+/*    @NotEmpty*/
+    private Set<Long> roles;
 
     @Override
     public int hashCode() {
@@ -32,8 +37,7 @@ public class UserUpdateRequest implements Serializable {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        UserUpdateRequest that = (UserUpdateRequest) obj;
+        UserDTO that = (UserDTO) obj;
         return Objects.equals(id, that.id);
     }
-
 }

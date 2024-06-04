@@ -1,13 +1,11 @@
-package arq.web.tp.integrador.user2.entity;
+package arq.web.tp.integrador.user.entity;
 
-import arq.web.tp.integrador.roles.entity.RoleEntity;
 import arq.web.tp.integrador.roles.entity.UserRoleEntity;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 

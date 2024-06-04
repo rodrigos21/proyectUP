@@ -1,4 +1,4 @@
-package arq.web.tp.integrador.user2.dto;
+package arq.web.tp.integrador.user.dto;
 
 import arq.web.tp.integrador.roles.entity.UserRoleEntity;
 import lombok.Data;

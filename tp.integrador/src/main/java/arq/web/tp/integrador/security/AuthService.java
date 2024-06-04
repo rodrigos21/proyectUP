@@ -1,17 +1,14 @@
 package arq.web.tp.integrador.security;
 
 
-import arq.web.tp.integrador.user2.dao.UserRepository;
-import arq.web.tp.integrador.user2.entity.Role;
-import arq.web.tp.integrador.user2.entity.User;
+import arq.web.tp.integrador.user.dao.UserRepository;
+import arq.web.tp.integrador.user.entity.Role;
+import arq.web.tp.integrador.user.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

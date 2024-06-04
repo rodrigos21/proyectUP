@@ -1,10 +1,10 @@
-package arq.web.tp.integrador.user2.controller;
+package arq.web.tp.integrador.user.controller;
 
-import arq.web.tp.integrador.user2.dto.Report;
-import arq.web.tp.integrador.user2.dto.UserDTO;
-import arq.web.tp.integrador.user2.dto.UserDTOResponse;
-import arq.web.tp.integrador.user2.dto.UserUpdateRequest;
-import arq.web.tp.integrador.user2.service.UserService;
+import arq.web.tp.integrador.user.dto.Report;
+import arq.web.tp.integrador.user.dto.UserDTO;
+import arq.web.tp.integrador.user.dto.UserDTOResponse;
+import arq.web.tp.integrador.user.dto.UserUpdateRequest;
+import arq.web.tp.integrador.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

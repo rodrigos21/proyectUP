@@ -1,4 +1,4 @@
-package arq.web.tp.integrador.user2.service;
+package arq.web.tp.integrador.user.service;
 
 import arq.web.tp.integrador.exceptions.CustomException;
 import arq.web.tp.integrador.roles.dto.RoleDTO;
@@ -10,13 +10,13 @@ import arq.web.tp.integrador.roles.repository.UserRoleJPARepository;
 import arq.web.tp.integrador.roles.service.RoleService;
 import arq.web.tp.integrador.security.AuthService;
 import arq.web.tp.integrador.security.RegisterRequest;
-import arq.web.tp.integrador.user2.converter.UserConverter;
-import arq.web.tp.integrador.user2.dao.UserJPARepository;
-import arq.web.tp.integrador.user2.dto.Report;
-import arq.web.tp.integrador.user2.dto.UserDTO;
-import arq.web.tp.integrador.user2.dto.UserDTOResponse;
-import arq.web.tp.integrador.user2.dto.UserUpdateRequest;
-import arq.web.tp.integrador.user2.entity.UserEntity;
+import arq.web.tp.integrador.user.converter.UserConverter;
+import arq.web.tp.integrador.user.dao.UserJPARepository;
+import arq.web.tp.integrador.user.dto.Report;
+import arq.web.tp.integrador.user.dto.UserDTO;
+import arq.web.tp.integrador.user.dto.UserDTOResponse;
+import arq.web.tp.integrador.user.dto.UserUpdateRequest;
+import arq.web.tp.integrador.user.entity.UserEntity;
 
 
 import jakarta.transaction.Transactional;

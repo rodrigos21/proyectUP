@@ -23,15 +23,16 @@ public class RoleController {
     public List<RoleDTO> getRoles() {
         return roleService.getRoles();
     }
-    @GetMapping("{id}")
+
+    @GetMapping("/{id}")
     public RoleDTO getRole(@PathVariable Long id) {
         return roleService.getRole(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long generateRole(@RequestBody RoleDTO role) {
-        return roleService.generateRole(role);
+    public Long createRole(@RequestBody RoleDTO role) {
+        return roleService.createRole(role);
     }
 
     @PatchMapping("/{id}")

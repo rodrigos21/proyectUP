@@ -1,7 +1,7 @@
 package arq.web.tp.integrador.roles.entity;
 
 import arq.web.tp.integrador.roles.dto.UserRoleId;
-import arq.web.tp.integrador.user2.entity.UserEntity;
+import arq.web.tp.integrador.user.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
