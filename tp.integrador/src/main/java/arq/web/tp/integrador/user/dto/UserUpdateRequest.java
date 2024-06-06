@@ -12,15 +12,10 @@ import java.util.Objects;
 public class UserUpdateRequest implements Serializable {
 
     private Long id;
-    @NotBlank
     private String name;
-    @NotBlank
     private String surname;
-    @NotBlank
     private String email;
-    @NotBlank
     private String dni;
-    @NotBlank
     private String phone;
 
     @Override

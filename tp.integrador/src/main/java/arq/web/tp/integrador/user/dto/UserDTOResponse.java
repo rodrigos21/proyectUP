@@ -13,19 +13,12 @@ import java.util.Set;
 @Builder
 public class UserDTOResponse implements Serializable {
     private Long id;
-    @NotBlank
     private String name;
-    @NotBlank
     private String surname;
-    @NotBlank
     private String email;
-    @NotBlank
     private String password;
-    @NotBlank
     private String dni;
-    @NotBlank
     private String phone;
-    @NotEmpty
     private Set<RoleDTO> roles;
 
     @Override

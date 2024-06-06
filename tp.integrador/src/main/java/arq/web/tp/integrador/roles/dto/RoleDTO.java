@@ -1,5 +1,6 @@
 package arq.web.tp.integrador.roles.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,7 +11,9 @@ import java.util.Objects;
 @Builder
 public class RoleDTO implements Serializable {
     private Long id;
+    @NotBlank(message = "name cannot be blank")
     private String name;
+    @NotBlank(message = "description cannot be blank")
     private String description;
 
     @Override
