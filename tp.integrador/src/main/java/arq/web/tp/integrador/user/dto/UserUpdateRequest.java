@@ -1,5 +1,6 @@
 package arq.web.tp.integrador.user.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
@@ -12,15 +13,11 @@ import java.util.Objects;
 public class UserUpdateRequest implements Serializable {
 
     private Long id;
-    @NotBlank
     private String name;
-    @NotBlank
     private String surname;
-    @NotBlank
+    @Email(message = "Email should be valid")
     private String email;
-    @NotBlank
     private String dni;
-    @NotBlank
     private String phone;
 
     @Override

@@ -34,7 +34,7 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
     @NotBlank
-    @Size(min = 8, max = 255)
+    @Size(min = 4, max = 255)
     //@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$",message = "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un dígito y un carácter especial")
     private String password;
     @Size(max = 20)
@@ -42,10 +42,7 @@ public class UserEntity {
     @Size(max = 20)
     private String phone;
     @OneToMany(mappedBy = "user")
-/*    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))*/
+
     private Set<UserRoleEntity> roles;
 
     @Override

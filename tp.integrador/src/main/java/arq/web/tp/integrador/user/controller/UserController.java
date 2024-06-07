@@ -5,14 +5,17 @@ import arq.web.tp.integrador.user.dto.UserDTO;
 import arq.web.tp.integrador.user.dto.UserDTOResponse;
 import arq.web.tp.integrador.user.dto.UserUpdateRequest;
 import arq.web.tp.integrador.user.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@Validated
 public class UserController {
 
     private UserService userService;
@@ -34,7 +37,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Long createUser(@RequestBody UserDTO userDTO) {
+    public Long createUser(@RequestBody @Valid UserDTO userDTO) {
         return userService.createUser(userDTO);
     }
 
