@@ -28,11 +28,6 @@ public class UserConverter {
     }
 
     public static UserEntity toEntity(UserDTO dto) {
-/*        UserEntity entity = null;
-        //entity.setId(dto.getId());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
-        entity.setRole(dto.getRole());*/
         return UserEntity.builder()
                 .name(dto.getName())
                 .surname(dto.getSurname())
