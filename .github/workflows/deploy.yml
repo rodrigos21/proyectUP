@@ -46,4 +46,4 @@ jobs:
         MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         MYSQL_USER: ${{ secrets.MYSQL_USER }}
         MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      run: docker-compose up --build -d
+      run: docker compose up --build -d
