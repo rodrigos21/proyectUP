@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+@ActiveProfiles("test")
 public class UserServiceTest {
     @Mock
     UserJPARepository userJPARepository;
