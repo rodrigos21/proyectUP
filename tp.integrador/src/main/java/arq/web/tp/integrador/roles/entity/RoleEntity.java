@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Builder
 @Data
-@Table(name = "ROLES")
+@Table(name = "roles")
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleEntity {

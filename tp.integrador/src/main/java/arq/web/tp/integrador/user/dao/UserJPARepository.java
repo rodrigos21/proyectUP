@@ -11,13 +11,13 @@ import java.util.List;
 @Repository
 public interface UserJPARepository extends JpaRepository<UserEntity, Long> {
 
-    @Query(nativeQuery = true, value = "SELECT * FROM USERS")
+    @Query(nativeQuery = true, value = "SELECT * FROM users")
     List<UserEntity> getUsers();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE id = :userId")
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE id = :userId")
     UserEntity getUserById(@Param("userId") Long userId);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE EMAIL = :email")
+    @Query(nativeQuery = true, value = "SELECT * FROM users WHERE EMAIL = :email")
     UserEntity findByEmail(@Param("email") String email);
 
 }
