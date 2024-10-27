@@ -13,7 +13,7 @@ public interface RoleJPARepository extends JpaRepository<RoleEntity, Long> {
 
     @Modifying
     @Transactional
-    @Query(nativeQuery = true, value = "UPDATE ROLES set name =:name, description =:description WHERE id =:id ")
+    @Query(nativeQuery = true, value = "UPDATE roles set name =:name, description =:description WHERE id =:id ")
     void updateRole(Long id, String name, String description);
 
 }
