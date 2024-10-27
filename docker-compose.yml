@@ -18,8 +18,9 @@ services:
     image: mysql:8.0.33
     ports:
       - "3307:3306"
-    build:
-      args:
+    #build:
+     # args:
+     environment:
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_DATABASE: ${MYSQL_DATABASE}
