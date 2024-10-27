@@ -39,6 +39,9 @@ jobs:
            # DB_PASSWORD=${{ secrets.DB_PASSWORD }}
     
     - name: Docker Compose Up
+      uses: docker/compose-action@v2
+      with:
+        args: up -d 
       env:
         DB_URL: ${{ secrets.DB_URL }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
@@ -46,4 +49,3 @@ jobs:
         MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
         MYSQL_USER: ${{ secrets.MYSQL_USER }}
         MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      #run: docker compose up --build -d
