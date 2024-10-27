@@ -13,8 +13,10 @@ Esta es una aplicación backend desarrollada en Java 17 utilizando Spring Boot. 
 - Spring Boot 3
 - Spring Security 6
 - JWT (JSON Web Token)
-- H2 Database
+- MySQL 
+- H2 Database to unit test
 - Maven
+- Docker
 
 ### Instalación
 1. Clona el repositorio: `git clone https://github.com/rodrigos21/proyectUP.git`
