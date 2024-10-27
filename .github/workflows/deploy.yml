@@ -23,7 +23,6 @@ jobs:
       run: mvn clean install
       working-directory: ./tp.integrador
       
-        # Aquí defines la versión
     - name: Define version
       id: vars
       run: echo "VERSION=1.0.${{ github.run_number }}" >> $GITHUB_ENV
@@ -32,7 +31,6 @@ jobs:
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: rodrigos21/devops-github-actions
-        #tags: latest
         tags: ${{ env.VERSION }},latest
         registry: docker.io
         dockerfile: tp.integrador/Dockerfile
