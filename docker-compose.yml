@@ -7,9 +7,6 @@ services:
     ports:
       - "8080:8081"
     environment:
-      #DB_URL: jdbc:mysql://abm_user:3306/tp_up_devops?createDatabaseIfNotExist=true&serverTimezone=UTC
-      #DB_USERNAME: developer
-      #DB_PASSWORD: 1234
       DB_URL: ${DB_URL}
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
@@ -22,10 +19,6 @@ services:
     ports:
       - "3307:3306"
     environment:
-      #MYSQL_ROOT_PASSWORD: 1234
-      #MYSQL_PASSWORD: 1234
-      #MYSQL_USER: developer
-      #MYSQL_DATABASE: tp_up_devops
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
