@@ -49,7 +49,7 @@ jobs:
 
       # Paso 2: Ejecutar Docker Compose con las variables de entorno necesarias
     - name: Run Docker Compose
-      run: docker-compose up --build -d
+      run: docker compose up --build -d
       env:
           DB_URL: ${{ secrets.DB_URL }}
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
