@@ -1,6 +1,7 @@
 services:
   app_abm_users:
     build:
+      container-name: app
       context: .
       dockerfile: tp.integrador/Dockerfile
     mem_limit: 512m
@@ -18,6 +19,7 @@ services:
       abm_user:
         condition: service_healthy
   abm_user:
+    container-name: db
     image: mysql:8.0.33
     ports:
       - "3307:3306"
