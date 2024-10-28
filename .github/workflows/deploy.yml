@@ -42,7 +42,18 @@ jobs:
          #   DB_URL=${{ secrets.DB_URL }}
          #   DB_USERNAME=${{ secrets.DB_USERNAME }}
          #   DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+      #env:
+      #    MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      #    MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      #    MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+
+      # Paso 2: Ejecutar Docker Compose con las variables de entorno necesarias
+    - name: Run Docker Compose
+      run: docker-compose up --build -d
       env:
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
