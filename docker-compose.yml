@@ -7,9 +7,12 @@ services:
     ports:
       - "8080:8081"
     environment:
-      DB_URL: ${DB_URL}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      - DB_URL
+      - DB_USERNAME
+      - DB_PASSWORD
+      #DB_URL: ${DB_URL}
+      #DB_USERNAME: ${DB_USERNAME}
+      #DB_PASSWORD: ${DB_PASSWORD}
     restart: always
     depends_on:
       abm_user:
@@ -19,9 +22,12 @@ services:
     ports:
       - "3307:3306"
     environment:
-        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-        MYSQL_USER: ${MYSQL_USER}
-        MYSQL_DATABASE: ${MYSQL_DATABASE}
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+      #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      #MYSQL_USER: ${MYSQL_USER}
+      #MYSQL_DATABASE: ${MYSQL_DATABASE}
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
