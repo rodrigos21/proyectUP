@@ -33,11 +33,14 @@ jobs:
         image: rodrigos21/devops-github-actions
         tags: ${{ env.VERSION }},latest
         registry: docker.io
-        dockerfile: tp.integrador/Dockerfile
-        context: tp.integrador
+        #dockerfile: tp.integrador/Dockerfile
+        #context: tp.integrador
+        dockerfile: ../tp.integrador/Dockerfile
+        context: ../tp.integrador
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        buildArgs: |
+        #buil-args: |
+        buildArgs: | 
             DB_URL=${{ secrets.DB_URL }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
