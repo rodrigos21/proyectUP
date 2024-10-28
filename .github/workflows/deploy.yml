@@ -37,8 +37,8 @@ jobs:
         context: tp.integrador
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        #buil-args: |
-        buildArgs: | 
+        #buildArgs: | 
+        buil-args: |
             DB_URL=${{ secrets.DB_URL }}
             DB_USERNAME=${{ secrets.DB_USERNAME }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
