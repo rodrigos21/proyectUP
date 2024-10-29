@@ -10,9 +10,10 @@ services:
         - DB_URL
         - DB_USERNAME
         - DB_PASSWORD
-      #DB_URL: ${DB_URL}
-      #DB_USERNAME: ${DB_USERNAME}
-      #DB_PASSWORD: ${DB_PASSWORD}
+        - MYSQL_ROOT_PASSWORD
+        - MYSQL_PASSWORD
+        - MYSQL_USER
+        - MYSQL_DATABASE
     restart: always
     depends_on:
       abm_user:
