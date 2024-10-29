@@ -1,7 +1,7 @@
 FROM openjdk:17-jdk-slim as builder
 WORKDIR /tp.integrador
 COPY ./tp.integrador .
-#RUN ls
+RUN ls
 RUN ./mvnw clean install -DskipTests
 
 # Env variables build
