@@ -10,7 +10,7 @@ FROM openjdk:17-jdk-slim as builder
 WORKDIR /tp.integrador
 COPY . .
 RUN ls
-RUN ./mvnw clean install -DskipTests
+RUN ./tp.integrador/mvnw clean install -DskipTests
 
 # Definir variables de construcción para que se pasen desde Docker Compose
 ARG DB_URL
