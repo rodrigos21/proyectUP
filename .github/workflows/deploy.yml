@@ -31,6 +31,5 @@ jobs:
           tags: ${{ env.VERSION }},latest
           registry: docker.io
           dockerfile: tp.integrador/Dockerfile
-          context: tp.integrador
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
