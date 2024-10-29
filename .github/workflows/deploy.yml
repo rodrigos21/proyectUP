@@ -19,9 +19,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: build with Maven
-        run: mvn clean install
-        working-directory: ./tp.integrador
 
       - name: Define version
         id: vars

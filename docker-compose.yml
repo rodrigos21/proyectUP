@@ -19,7 +19,8 @@ services:
       abm_user:
         condition: service_healthy
   abm_user:
-    image: mysql:8.0.33
+    #image: mysql:8.0.33
+    image: postgres:16
     ports:
       - "3307:3306"
     environment:
