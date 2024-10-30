@@ -42,7 +42,7 @@ jobs:
     #needs: testing
     needs: build
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
