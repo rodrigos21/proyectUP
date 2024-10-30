@@ -38,8 +38,7 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
-    #needs: testing
-    needs: build
+    needs: testing
     defaults:
       run:
         working-directory: ./tp.integrador
