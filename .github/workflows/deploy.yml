@@ -42,26 +42,14 @@ jobs:
     #needs: testing
     needs: build
     steps:
-      - name: Print current directory
-        run: |
-            echo "Current directory:"
-            pwd
-      - name: List files in the current directory
-        run: |
-          ls -la
-        working-directory: ./tp.integrador
-      - name: Nuevo listado
-        run: |
-         ls -la
-   
-
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
         with:
+          context: ./tp.integrador
           image: rodrigos21/devops-github-actions
           tags: ${{ env.VERSION }},latest
           registry: docker.io
-          dockerfile: ./tp.integrador/Dockerfile
+          dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
   deploy:
