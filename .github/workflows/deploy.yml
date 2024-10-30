@@ -28,16 +28,10 @@ jobs:
     needs: build
     steps:
       - name: Run Unit Tests
-        run:  |
-          echo "Starting directory:"
-          pwd
-          cd tp.integrador/
-          echo "Directory after cd:"
-          pwd
-          mvn test
-          cd -
-          echo "Returned to directory:"
-          pwd
+        run:  mvn test
+        working-directory: ./tp.integrador
+
+
   docker:
     runs-on: ubuntu-latest
     needs: testing
