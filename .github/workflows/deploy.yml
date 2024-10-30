@@ -47,7 +47,13 @@ jobs:
             echo "Current directory:"
             pwd
       - name: List files in the current directory
-        run: ls -la
+        run: |
+          ls -la
+        working-directory: ./tp.integrador
+      - name: Nuevo listado
+        run: |
+         ls -la
+   
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v6
