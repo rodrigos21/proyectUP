@@ -47,8 +47,8 @@ jobs:
           image: rodrigos21/devops-github-actions
           tags: ${{ env.VERSION }},latest
           registry: docker.io
-          directory: up/tp.integrador
-          dockerfile: up/tp.integrador/Dockerfile
+          directory: rodrigos21/proyectUP/up/tp.integrador
+          dockerfile: rodrigos21/proyectUP/up/tp.integrador/Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
   deploy:
