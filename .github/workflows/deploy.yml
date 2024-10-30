@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Run Unit Tests
         run: |
-          cd tp.integrador/
+          cd tp.integrador
           mvn test
           cd -
   docker:
