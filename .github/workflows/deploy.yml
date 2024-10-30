@@ -48,7 +48,7 @@ jobs:
           tags: ${{ env.VERSION }},latest
           registry: docker.io
           directory: proyectUP/proyectUP/up/tp.integrador
-          dockerfile: proyectUP/proyectUP/up/tp.integrador/Dockerfile
+          dockerfile: /Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
   deploy:
