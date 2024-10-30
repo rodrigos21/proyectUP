@@ -43,6 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: testing
     steps:
+        - uses: actions/checkout@v4
+          with:
+            path: './tp.integrador'
         - name: Build & push Docker image
           uses: mr-smithers-excellent/docker-build-push@v6
           with:
