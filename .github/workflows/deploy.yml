@@ -17,7 +17,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+      - name: Build project without tests
+        run: mvn clean install -DskipTests
       - name: Define version
         id: vars
         run: echo "VERSION=1.0.${{ github.run_number }}" >> $GITHUB_ENV
@@ -29,7 +30,7 @@ jobs:
         run:  |
           echo "Starting directory:"
           pwd
-          cd up/tp.integrador
+          cd tp.integrador/
           echo "Directory after cd:"
           pwd
           mvn test
