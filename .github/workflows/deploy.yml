@@ -47,12 +47,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-          - name: Deploy to production
-            if: github.ref == 'refs/head/master'
-            env:
-              deploy_url : $ {{ secrets.RENDER_DEPLOY_HOOK_URL }}
-            run: |
-              curl "$deploy_url"
+  #deploy:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - name: Deploy to production
+  #      if: github.ref == 'refs/head/master'
+  #      env:
+  #        deploy_url : $ {{ secrets.RENDER_DEPLOY_HOOK_URL }}
+  #      run: |
+  #        curl "$deploy_url"
