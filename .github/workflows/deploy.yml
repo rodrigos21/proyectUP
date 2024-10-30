@@ -44,11 +44,10 @@ jobs:
     needs: testing
     steps:
         - uses: actions/checkout@v4
-          with:
-            path: './tp.integrador'
         - name: Build & push Docker image
           uses: mr-smithers-excellent/docker-build-push@v6
           with:
+            path: tp.integrador
             image: rodrigos21/devops-github-actions
             tags: ${{ env.VERSION }},latest
             registry: docker.io
