@@ -10,6 +10,7 @@ services:
         - DB_URL
         - DB_USERNAME
         - DB_PASSWORD
+        - SENTRY_DSN
     restart: always
     depends_on:
       abm_user:
